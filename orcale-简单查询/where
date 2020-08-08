@@ -1,0 +1,145 @@
+where cond1
+运算符 + - * /
+比较运算符
+单引号是字符串 :大小写敏感----->这个和sql的字符集有关
+双引号是别名
+
+= ! <> < > <=  >= between and
+
+    SQL> select * from emp where deptno=10;
+
+    EMPNO ENAME                JOB                       MGR HIREDATE              SAL       COMM     DEPTNO
+    ---------- -------------------- ------------------ ---------- -------------- ---------- ---------- ----------
+    7782 CLARK                MANAGER                  7839 09-6月 -81           2450                    10
+    7839 KING                 PRESIDENT                     17-11月-81           5000                    10
+    7934 MILLER               CLERK                    7782 23-1月 -82           1300                    10
+
+        SQL> select * from emp where ename='KING';
+
+             EMPNO ENAME                JOB                       MGR HIREDATE              SAL       COMM     DEPTNO
+             ---------- -------------------- ------------------ ---------- -------------- ---------- ---------- ----------
+                   7839 KING                 PRESIDENT                     17-11月-81           5000                    10
+
+SQL> select * from emp where sal=1250;
+
+     EMPNO ENAME                JOB                       MGR HIREDATE              SAL       COMM     DEPTNO
+     ---------- -------------------- ------------------ ---------- -------------- ---------- ---------- ----------
+           7521 WARD                 SALESMAN                 7698 22-2月 -81           1250        500         30
+                 7654 MARTIN               SALESMAN                 7698 28-9月 -81           1250       1400         30
+
+
+查看日期设置:select * from v$nls_parameters; 
+
+    SQL> alter session set NLS_DATE_FORMAT='yyyy-mm-dd';
+
+    会话已更改。
+
+---------->注意,这样一改,所有的表的日期显示就会出现问题,有待解决
+
+
+
+
+
+
+逻辑运算符: and or not
+                SQL> select * from emp where deptno=10 or deptno=20;
+
+                EMPNO ENAME                JOB                       MGR HIREDATE          SAL       COMM     DEPTNO
+                ---------- -------------------- ------------------ ---------- ---------- ---------- ---------- ----------
+                7369 SMITH                CLERK                    7902 1980-12-17        800                    20
+                7566 JONES                MANAGER                  7839 1981-04-02       2975                    20
+                7782 CLARK                MANAGER                  7839 1981-06-09       2450                    10
+                7788 SCOTT                ANALYST                  7566 1987-04-19       3000                    20
+                7839 KING                 PRESIDENT                     1981-11-17       5000                    10
+                7876 ADAMS                CLERK                    7788 1987-05-23       1100                    20
+                7902 FORD                 ANALYST                  7566 1981-12-03       3000                    20
+                7934 MILLER               CLERK                    7782 1982-01-23       1300                    10
+
+                已选择8行。
+                QL> select * from emp where sal>1000 and sal<3000;
+
+                EMPNO ENAME                JOB                       MGR HIREDATE          SAL       COMM     DEPTNO
+                ---------- -------------------- ------------------ ---------- ---------- ---------- ---------- ----------
+                7499 ALLEN                SALESMAN                 7698 1981-02-20       1600        300         30
+                7521 WARD                 SALESMAN                 7698 1981-02-22       1250        500         30
+                7566 JONES                MANAGER                  7839 1981-04-02       2975                    20
+                7654 MARTIN               SALESMAN                 7698 1981-09-28       1250       1400         30
+                7698 BLAKE                MANAGER                  7839 1981-05-01       2850                    30
+                7782 CLARK                MANAGER                  7839 1981-06-09       2450                    10
+                7844 TURNER               SALESMAN                 7698 1981-09-08       1500          0         30
+                7876 ADAMS                CLERK                    7788 1987-05-23       1100                    20
+                7934 MILLER               CLERK                    7782 1982-01-23       1300                    10
+
+                已选择9行。
+
+                    SQL> select * from emp  where sal between 1000 and  3000;
+
+                    EMPNO ENAME                JOB                       MGR HIREDATE          SAL       COMM     DEPTNO
+                    ---------- -------------------- ------------------ ---------- ---------- ---------- ---------- ----------
+                    7499 ALLEN                SALESMAN                 7698 1981-02-20       1600        300         30
+                    7521 WARD                 SALESMAN                 7698 1981-02-22       1250        500         30
+                    7566 JONES                MANAGER                  7839 1981-04-02       2975                    20
+                    7654 MARTIN               SALESMAN                 7698 1981-09-28       1250       1400         30
+                    7698 BLAKE                MANAGER                  7839 1981-05-01       2850                    30
+                    7782 CLARK                MANAGER                  7839 1981-06-09       2450                    10
+                    7788 SCOTT                ANALYST                  7566 1987-04-19       3000                    20
+                    7844 TURNER               SALESMAN                 7698 1981-09-08       1500          0         30
+                    7876 ADAMS                CLERK                    7788 1987-05-23       1100                    20
+                    7902 FORD                 ANALYST                  7566 1981-12-03       3000                    20
+                    7934 MILLER               CLERK                    7782 1982-01-23       1300                    10
+
+                    已选择11行。
+    -------------------->
+    -------------------->between  and 就相当于 < and  >
+    -------------------->between adn是天生闭区间
+            QL> select * from emp where hiredate  between  '1981-2-1' and '1982-2-1';
+
+            EMPNO ENAME                JOB                       MGR HIREDATE          SAL       COMM     DEPTNO
+            ---------- -------------------- ------------------ ---------- ---------- ---------- ---------- ----------
+            7499 ALLEN                SALESMAN                 7698 1981-02-20       1600        300         30
+            7521 WARD                 SALESMAN                 7698 1981-02-22       1250        500         30
+            7566 JONES                MANAGER                  7839 1981-04-02       2975                    20
+            7654 MARTIN               SALESMAN                 7698 1981-09-28       1250       1400         30
+            7698 BLAKE                MANAGER                  7839 1981-05-01       2850                    30
+            7782 CLARK                MANAGER                  7839 1981-06-09       2450                    10
+            7839 KING                 PRESIDENT                     1981-11-17       5000                    10
+            7844 TURNER               SALESMAN                 7698 1981-09-08       1500          0         30
+            7900 JAMES                CLERK                    7698 1981-12-03        950                    30
+            7902 FORD                 ANALYST                  7566 1981-12-03       3000                    20
+            7934 MILLER               CLERK                    7782 1982-01-23       1300                    10
+
+            已选择11行。
+null:重要结论
+    null不能用= 或!=判断,一旦使用了这俩进行判断永远为假:
+    要使用is 或者 isnot
+    SQL> select * from emp where comm is null;
+
+                    EMPNO ENAME                JOB                       MGR HIREDATE              SAL       COMM     DEPTNO
+                    ---------- -------------------- ------------------ ---------- -------------- ---------- ---------- ----------
+                    7369 SMITH                CLERK                    7902 17-12月-80            800                    20
+                    7566 JONES                MANAGER                  7839 02-4月 -81           2975                    20
+                    7698 BLAKE                MANAGER                  7839 01-5月 -81           2850                    30
+                    7782 CLARK                MANAGER                  7839 09-6月 -81           2450                    10
+                    7788 SCOTT                ANALYST                  7566 19-4月 -87           3000                    20
+                    7839 KING                 PRESIDENT                     17-11月-81           5000                    10
+                    7876 ADAMS                CLERK                    7788 23-5月 -87           1100                    20
+                    7900 JAMES                CLERK                    7698 03-12月-81            950                    30
+                    7902 FORD                 ANALYST                  7566 03-12月-81           3000                    20
+                    7934 MILLER               CLERK                    7782 23-1月 -82           1300                    10
+
+                    已选择10行。
+
+                    SQL> select * from emp where comm is not null;
+
+                    EMPNO ENAME                JOB                       MGR HIREDATE              SAL       COMM     DEPTNO
+                    ---------- -------------------- ------------------ ---------- -------------- ---------- ---------- ----------
+                    7499 ALLEN                SALESMAN                 7698 20-2月 -81           1600        300         30
+                    7521 WARD                 SALESMAN                 7698 22-2月 -81           1250        500         30
+                    7654 MARTIN               SALESMAN                 7698 28-9月 -81           1250       1400         30
+                    7844 TURNER               SALESMAN                 7698 08-9月 -81           1500          0         30
+
+where多条件过滤策略:                                                                                                       
+142         where后边的约束条件,是右边的先执行                                                                                 
+143         ---->and的时候,容易0的放右边                                                                                       
+144         ---->or的时候,容易1的放右边                                                                                        
+145         ----->多个符合条件时,使用小括号,小括号优先级高 
