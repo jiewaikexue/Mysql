@@ -1,0 +1,120 @@
+理论基础:笛卡尔集合
+
+笛卡尔全集:
+        全集的行数=表1的行数*标2的行数
+        全集的列数=表一的列数+表2的列数
+
+        全集有很多垃圾,需要过滤
+
+    ---->连接(过滤):连接条件:字段内容相等
+        2张表的链接条件:1个
+        3张~        :2个
+        ....
+        n张~        :n-1个
+        上述是最小链接条件
+
+等值连接:
+    SQL> select empno,ename,sal,dname from dept d,emp e where d.deptno=e.deptno;
+
+    EMPNO ENAME                       SAL DNAME
+    ---------- -------------------- ---------- ----------------------------
+    7782 CLARK                      2450 ACCOUNTING
+    7839 KING                       5000 ACCOUNTING
+    7934 MILLER                     1300 ACCOUNTING
+    7566 JONES                      2975 RESEARCH
+    7902 FORD                       3000 RESEARCH
+    7876 ADAMS                      1100 RESEARCH
+    7369 SMITH                       800 RESEARCH
+    7788 SCOTT                      3000 RESEARCH
+    7521 WARD                       1250 SALES
+    7844 TURNER                     1500 SALES
+    7499 ALLEN                      1600 SALES
+    7900 JAMES                       950 SALES
+    7698 BLAKE                      2850 SALES
+    7654 MARTIN                     1250 SALES
+
+    已选择14行。
+不等职连接:
+    QL> ed
+    已写入 file afiedt.buf
+
+    1  select empno,ename,sal,grade
+    2  from emp e,salgrade s
+    3* where e.sal between s.losal  and s.hisal
+    SQL> /
+
+    EMPNO ENAME                       SAL      GRADE
+    ---------- -------------------- ---------- ----------
+    7369 SMITH                       800          1
+    7900 JAMES                       950          1
+    7876 ADAMS                      1100          1
+    7521 WARD                       1250          2
+    7654 MARTIN                     1250          2
+    7934 MILLER                     1300          2
+    7844 TURNER                     1500          3
+    7499 ALLEN                      1600          3
+    7782 CLARK                      2450          4
+    7698 BLAKE                      2850          4
+    7566 JONES                      2975          4
+    7788 SCOTT                      3000          4
+    7902 FORD                       3000          4
+    7839 KING                       5000          5
+
+    已选择14行。
+
+外连接:口诀:如果想保住连接条件左边的,就在右边写上(+)
+            ------------------->左外链接:想保留等号左边的表,(+)放在右边
+            ------------------->右外链接:想保留等号右边的表,(+)放在左边
+            ------------------->左右都保留:(+)=(+)
+        SQL> ed
+        已写入 file afiedt.buf
+
+        1  select d.deptno,d.dname,count(*)
+        2  from dept d,emp e
+        3  where d.deptno=e.deptno(+)
+        4* group by d.deptno,d.dname
+        SQL> /
+
+        DEPTNO DNAME                          COUNT(*)
+        ---------- ---------------------------- ----------
+        10 ACCOUNTING                            3
+        40 OPERATIONS                            1
+        20 RESEARCH                              5
+        30 SALES                                 6
+
+        SQL> ed
+        已写入 file afiedt.buf
+
+        1  select d.deptno,d.dname,count(sal)
+        2  from dept d,emp e
+        3  where d.deptno=e.deptno(+)
+        4* group by d.deptno,d.dname
+        SQL> /
+
+        DEPTNO DNAME                        COUNT(SAL)
+        ---------- ---------------------------- ----------
+        10 ACCOUNTING                            3
+        40 OPERATIONS                            0
+        20 RESEARCH                              5
+        30 SALES                                 6
+
+自连接:都在一个表里,只能自己链接自己,把一张表当成两张表用
+        自连接的使用条件:
+                        1.都在一个表中
+                        2.不在同一行
+                弊端: 一般是小表使用,达标就算了因为他是一个2次方级别的
+
+        完美写法(有大老板,但是大老板的老板是null)-------------->还需要进行滤空
+        1  select e.ename||'''s  boss  is '||b.ename
+        2   from emp e,emp b
+        3* where e.mgr(+)=b.empno
+        少了大老板写法(缺一个+)
+        1  select e.ename||'''s  boss  is '||b.ename
+        2   from emp e,emp b
+        3* where e.mgr=b.empno
+    连接条件的写法:
+                1 表.列明
+                2 给表起别名: 别名.列名
+
+
+

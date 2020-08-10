@@ -1,0 +1,73 @@
+分组函数有哪些
+    max:最大
+    min:最小
+    avg:平均
+    suM:总和
+        SQL> select avg(sal),sum(sal)/count(sal) from emp;
+
+          AVG(SAL) SUM(SAL)/COUNT(SAL)
+          ---------- -------------------
+          2073.21429          2073.21429
+
+    count:求数量
+        
+        SQL> select count( distinct job ) from emp;
+
+        COUNT(DISTINCTJOB)
+        ------------------
+
+组函数自带滤空功能:
+    
+数据分组
+    group by
+        在select中出现的非组函数的列,必须在group by中出现
+
+
+where后面不能使用分组函数,但是能使用数据分组
+        where不能出现在group by后面
+
+
+having的作用:对分组进行过滤:
+    group by xxxx having 条件    
+
+where 和having在都能使用的情况下,如何抉择?
+    优先where.where是先过滤再分组
+    having是先分组在过滤
+
+
+
+
+    SQL> select deptno,avg(sal) from emp group by deptno having avg(sal)>2000;
+
+        DEPTNO   AVG(SAL)
+        ---------- ----------
+                20       2175
+                        10 2916.66667
+
+
+
+SQL> select deptno,avg(sal) from emp where deptno in (10,20,40) group by deptno;
+
+    DEPTNO   AVG(SAL)
+    ---------- ----------
+            20       2175
+                    10 2916.66667
+
+
+
+SQL> select deptno,avg(sal) from emp where deptno=10 group by deptno;
+
+    DEPTNO   AVG(SAL)
+    ---------- ----------
+            10 2916.66667
+
+
+
+orderby
+使用 ORDER BY 子句排序
+        order by ASC（ascend）: 升序
+        order by DESC（descend）: 降序
+        order by 别名 .....
+        order by 字段 ......
+ORDER BY 子句在SELECT语句的结尾。
+

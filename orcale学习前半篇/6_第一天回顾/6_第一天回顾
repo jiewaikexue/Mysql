@@ -1,0 +1,22 @@
+select:
+distinct 字段:去重
+from xxx xxx:表,也就是数据来源
+where:条件过滤 ,紧跟在from 后边
+        ---->where后边不能写分组函数(聚合函数)
+between   to  :作弊右开区间
+group by xxx xxx:分组依据--->要查询的东西,必须要在group by后边
+    ---->select 是显示查询的列
+    ----> group by 是控制分组
+    ---->select 数据如何显示
+    ---->group by 数据如何分组
+    ---->所以,group by a select b  a是b的超级
+
+having:
+select xx from yy where xx=? group by xxx kkk having xxx=?;
+
+先group by分组
+在having 对分组进行过滤
+再select 查询(显示)
+对显示结果根据where过滤
+--------------------------------
+order by:返回的顺序是未定义的

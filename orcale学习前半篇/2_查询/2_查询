@@ -1,0 +1,62 @@
+select 查询;
+
+select *|{部分列,表达式,别名.去除重复} from table;
+
+        select * from table;
+        select * from emp;
+        select  empno as "员工号",ename "姓名",sal 奖金,comm 月薪,sal*14  "14薪" from emp;
+        ----->字段 as "xxx"  这是起别名
+        ----->as 可以省略
+        ----->双引号可以省略------>14薪不加双引号就会报错----->一般推荐加上双引号
+        ----->入骨不使用双引号的话,不能有空格和不可见字符
+
+            *是全部的列;
+                推荐些指定列,
+                效率比较低
+        orcale从9i版本之后,*和指定列没有效率区别
+
+-----> select  empno as "员工号",ename "姓名",sal 奖金,comm 月薪,sal*14+comm  "年收入" from emp;
+    捣蛋鬼NULL
+    NULL参与运算之后 ,还是NULL
+     =======>解决办法,缕空函数
+     =======>缕空函数 nvl(字段,xx)
+            ------>会把该字段的null替换成xx
+            -------> nvl(a,b)
+                    如果a为null,结果为b,如果a部位null,结果为a
+
+----->去重;
+distinct,去除重复行
+            select distinct deptno from emp;
+            ===>distinct 的作用域是对于整行(也就是一条记录)
+                而不是一列
+
+------->edit
+sql错误的修改方法
+edit指令;
+edit输入完了之后,会有一个文本,把select指令写进去就行了
+最后保存
+安一个 /
+
+------>伪表,伪列
+        伪表 :dual (相当于一个空表)
+            计算或者使用函数的时候,,用伪表
+                SQL> select distinct 3+20*5,sysdate from dual;
+
+                3+20*5 SYSDATE
+                ---------- --------------
+                       103 08-8月 -20
+        伪列: 本来就存在的列,但是不依赖与某一个表
+                
+
+----->sql和sqlplus的区别
+
+    desc
+    edit       sqlplus
+    select     sql;
+    
+    在客户端上操作的是sqlplus的指令
+    在实例上用的是sql指令,这个是通用的
+
+    sql指令是需要和我数据库进行交互的,sqlplus是本地:
+    ?  topic  ---->查询sqlplus指令
+

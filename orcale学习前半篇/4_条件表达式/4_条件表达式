@@ -1,0 +1,68 @@
+sql99标准
+case 子段 when 字段内容 then func
+     when 字段内容 then func
+      when 字段内容 then func
+      else 字段内容 then func
+end as "xxx"
+举例:zo展开
+    举例1: 
+
+    select  job,empno,ename,sal as "brfore",case job                 
+    when 'PRESIDENT' then sal+0                                      
+    when 'MANAGER' then sal+200                                      
+    else sal+1000
+    end  as asll                                                     
+    from emp        
+    /         
+    SQL> /
+
+    JOB                     EMPNO ENAME                    brfore       ASLL
+    ------------------ ---------- -------------------- ---------- ----------
+    CLERK                    7369 SMITH                       800       1800
+    SALESMAN                 7499 ALLEN                      1600       2600
+    SALESMAN                 7521 WARD                       1250       2250
+    MANAGER                  7566 JONES                      2975       3175
+    SALESMAN                 7654 MARTIN                     1250       2250
+    MANAGER                  7698 BLAKE                      2850       3050
+    MANAGER                  7782 CLARK                      2450       2650
+    ANALYST                  7788 SCOTT                      3000       4000
+    PRESIDENT                7839 KING                       5000       5000
+    SALESMAN                 7844 TURNER                     1500       2500
+    CLERK                    7876 ADAMS                      1100       2100
+    CLERK                    7900 JAMES                       950       1950
+    ANALYST                  7902 FORD                       3000       4000
+    CLERK                    7934 MILLER                     1300       2300
+
+    已选择14行。
+    举例2;
+    select  job,empno,ename,sal as "brfore",case job
+    when 'PRESIDENT' then sal+0
+    when 'MANAGER' then sal+200
+    end  as asll
+    from emp
+    /
+
+    JOB                     EMPNO ENAME                    brfore       ASLL
+    ------------------ ---------- -------------------- ---------- ----------
+    CLERK                    7369 SMITH                       800
+    SALESMAN                 7499 ALLEN                      1600
+    SALESMAN                 7521 WARD                       1250
+    MANAGER                  7566 JONES                      2975       3175
+    SALESMAN                 7654 MARTIN                     1250
+    MANAGER                  7698 BLAKE                      2850       3050
+    MANAGER                  7782 CLARK                      2450       2650
+    ANALYST                  7788 SCOTT                      3000
+    PRESIDENT                7839 KING                       5000       5000
+    SALESMAN                 7844 TURNER                     1500
+    CLERK                    7876 ADAMS                      1100
+    CLERK                    7900 JAMES                       950
+    ANALYST                  7902 FORD                       3000
+    CLERK                    7934 MILLER                     1300
+
+    已选择14行。
+orcale特有
+decode:是一个函数
+    语法;
+        decode(目标字段,子段内容,func,字段内容,func,(else)func)
+
+        我爱sql99
