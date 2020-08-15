@@ -1,0 +1,7 @@
+
+update tabname set column1=val,column2=val2,... where ctrl
+        1.set 后面的赋值是可以用null的
+        2.
+
+&可以在所有的sql语句里使用  
+        他就是一个值的替换,只不过,有了一次交互

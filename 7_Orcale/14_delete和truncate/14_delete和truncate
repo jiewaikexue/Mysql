@@ -1,0 +1,30 @@
+sql语言类型:    
+        dml语言:数据操作语言 eg :select,insert update delete    
+        ddl语言:数据定义语言 eg; create truncate    
+        dcl语言:数据控制欲语言 eg:基本上接触不到grant/revoke 
+
+delete 是逐行删除数据(删除表中选定行)(删除表中所有行)
+truncate:先摧毁表,在重建
+
+        set feedback off; 打开回显开关
+                ----->就是那个已显示14行
+        set timing  off :关闭时间显示
+                已用时间 xxxxx
+        cmd 下 脚本建表:
+                sql-> @路径+文件名   就可以了
+
+结论:
+    当数据量大的时候,truncate更快--->mysql或者orcale都用truncate来清空数据表
+
+
+delete: 1.逐行删除
+        2.是dml语句,可以闪回
+        3.因为delete是逐条删除,所以会产生碎片
+        4.delete不会释放空间(用delete删除一张10m的表,不会释放这10m的空间)
+        5.delete可以回滚
+truncate:
+        1.整表摧毁
+        2.是ddl语言,不可以闪回
+        3.整表摧毁,不会产生碎片
+        4.会把空间也释放掉
+        5.不可以回滚rollback

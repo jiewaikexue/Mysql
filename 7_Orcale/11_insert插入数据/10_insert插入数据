@@ -1,0 +1,29 @@
+sql语言类型:
+    dml语言:数据操作语言 eg :select,insert update delete
+    ddl语言:数据定义语言 eg; create truncate
+    dcl语言:数据控制欲语言 eg:基本上接触不到grant/revoke
+=======
+    所有的dml语句都能用 子查询
+    & 可以用在所有的sql语句
+
+
+
+=======
+
+全列插入:
+inseret into table values(内容)...
+部分插入
+insert into table (字段)values(内容) ...
+可以显示的插入null
+只要可以为空就行
+
+--------------
+&的作用:只管插入数据,无脑输入就行了
+insert into emp values(&sal,&depymno,&name)
+下面这种,甚至在你插入的时候,都不用关心name的类型,已经确定了
+insert into emp values(&sal,&depymno,'&name')
+批量处理数据: 
+
+inseret into table select * from emp where deptno=10;
+---->insteret into table 集合/同类表/符合要求的数据
+    就插进去了

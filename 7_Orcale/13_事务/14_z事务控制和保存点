@@ -1,0 +1,10 @@
+控制事务:
+提交commit:
+回滚rollback:
+保存点;savepoint
+
+savepoint aaa;
+rollback to aaa:
+            可以理解为世界线回溯.
+
+

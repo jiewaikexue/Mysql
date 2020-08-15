@@ -1,0 +1,24 @@
+
+伪表:dual
+    用函数,或是算术的时候
+伪列:
+    rownum:
+            随着集合的创建就固定了
+            特性:只能where rownum<# 不能> 也不能between
+
+            top-N问题(区间问题):
+                    top-N好解决,直接倒序输出 rownum<#
+                    区间问题:需要将rownum重命名
+                            然后将别名传出去,在根据别名做查询
+                    eg;
+                        select * from
+                            (select rownum r,e.* from emp e where rownum<9)
+                        where r>4;
+
+
+            注意:
+                *显示的前提是,没有重复的字段名
+                ---->多表联合的时候,会有大坑
+
+    rowid:也是个伪列
+            只不过存的是行的地址

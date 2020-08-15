@@ -1,0 +1,5 @@
+delete:删除一行或者一张表内的数据
+drop :才是彻底删除一张表
+delete from tablename where ...
+
+行移动

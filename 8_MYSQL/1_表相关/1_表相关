@@ -1,0 +1,15 @@
+
+if exists
+
+rename to --->支持跨数据库重命名
+        ---->可以利用这点,对数据库重命名.
+        ======>创建一个新的数据库,将就数据库里面的表
+                全部rename到新数据库里面去
+
+对于列来说
+add
+drop
+modify:列的重定义
+change:列的改名
+alter table tablename character set utf8---->修改表的字符集
+
