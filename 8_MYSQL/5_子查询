@@ -1,0 +1,30 @@
+
+行子查询:
+        如果select 子查询,查出了一行
+        而这一行有是一个where条件
+        这时,我们就需要用()去构建一行
+        暨(xx,xxx)=(select xx,xxx from name where ....)
+
+
+exists:
+    exists(子查询):
+            如果子查询能查到数据,就返回1
+            如果子查询查不到数据,就返回0
+            ---->通过bool值来影响where
+            所以 exists没查到一条数据,都会去判断where的结果
+            为真则执行外部查询
+            为假则继续执行
+            相当于一个嵌套for
+
+in:
+    子查询会把所有结果形成一个集合
+    外部查询每找到一条记录,都回去判断是否in
+
+if exists 表名字
+
+
+    exists为存在量词。两种用法举例：
+    1、用于子查询。带有EXISTS的子查询不返回任何数据，只产生逻辑真值“true”或者逻辑假值“false”。
+    例如：select 列 from 表1 where exists (select 列 from 表2 where …);
+    括号中为子查询，当子查询满足条件时，exists(子查询)返回true,父级查询在进行查询，否则，父级查询跳过。
+    2、drop table if exists 表A；如果存在表A，则删除表A

@@ -1,0 +1,51 @@
+存储引擎:也叫做表类型,指的是数据表的存储机制,索引方案等配套的相关功能
+eg: mysiam  innodb bdb memory archive
+    默认的表类型 innodb
+
+    修改默认的存储引擎:--->改my.ini文件  default-storage -engine=innodb
+
+    用表的属性:
+        engine 引擎类型
+
+    eg:
+        修改表的存储引擎
+    alter table tbl_name engine innodb ()
+        创建时顺带确定存储引擎:
+    create table name ( xx int ,xxx int... ) engine innodb------>存储引擎的选用,一般放在最后
+
+
+
+    一个innode 会生成一个文件: frm(结构文件)
+                        ------>所有的innodb存储引擎,都会把他的数据文件和缩影文件,统一放在一个文件
+                        ------>这个文件,,也就是innodb的表空间目录
+    一个mysiam3会生成三个文件:  frm(结构文件) MYD(数据文件) MYI(索引文件)
+
+
+
+去和选择一个适合自己的存储引擎
+    1.性能:
+    2.功能
+
+    是否支持外键
+    是否需要事务支持
+    并发量的要求: 这个要看锁的粒度(越细,并发越高)
+    错误恢复的处理
+    是否支持某些具体的功能: (innodb挺好)
+innnodb和mysim的区别
+
+    1.数据和缩影保存的文件不同,myisam是分开保存 innodb的数据文件和缩影文件,是存储在一个大锅(表空间)里面
+    2.myisam支持索引压缩(因为这玩意单独程表)
+        innodb不可以缩影压缩
+        --->海量查询的时候,缩影压缩有效果
+    3.innodb支持行级锁
+        myisam支持表级锁
+        所以,innodb的并发高
+    4.innodb支持事务,外键,数据完整性约束要强
+        而myisam不支持
+    5.innodb中不保存表的具体行数,也就是说
+    select count(*)  时,innodb需要扫描整个表
+    而myisam中是保存有表的行数到的
+    但是 有where条件约束后,都是扫描整个表
+    6.    对于 auto_increment类型的字段,innodb中必须包含只有该字段的索引
+        但是在myisam中可以与其他字段一起构成联合所以
+
