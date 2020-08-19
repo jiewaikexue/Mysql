@@ -1,0 +1,17 @@
+
+备份:
+    方案一:
+        备份相关文件:
+            myisam: 备份 .frm .myd .myi文件
+            innodb:备份 .frm还不行.
+                    因为innodb的数据在表空间里面
+    方案二:
+            利用mysql工具集中的mysqldump
+
+           备份库: musqldump  -u用户 -p密码 databases_name > 带路径文件
+            备份表:mysqldump  -u用户 -p密码 -B 表名称 > 带路径文件
+
+还原:
+    方案一: 把文件放回原来位置
+    方案二: 
+            1.source 带路径文件
